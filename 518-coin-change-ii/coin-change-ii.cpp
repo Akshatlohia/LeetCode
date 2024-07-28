@@ -5,9 +5,9 @@ public:
             if(amt%coins[ind]==0) return 1;
             else return 0;
         }
-        if(amt == 0){
-            return 1;
-        }
+        // if(amt == 0){
+        //     return 1;
+        // }
         if(dp[ind][amt]!=-1)return dp[ind][amt];
         int notTake = f(ind-1, amt, coins, dp);
         int take = 0;
@@ -23,5 +23,7 @@ public:
         vector<vector<int>> dp(n, vector<int>(amount+1, -1));
 
         return f(n-1, amount, coins, dp);
+
+        
     }
 };
