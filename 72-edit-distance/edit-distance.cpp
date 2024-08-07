@@ -50,13 +50,7 @@ public:
                     cur[j] = prev[j-1];
                 }
                 else{
-                    int insert = 1 + cur[j-1];
-
-                    int del = 1 + prev[j];
-
-                    int replace = 1 + prev[j-1];
-
-                    cur[j] = min(insert, min(del, replace));
+                    cur[j] = 1 + min(cur[j-1], min(prev[j], prev[j-1]));
                 }
             }
             prev = cur;
