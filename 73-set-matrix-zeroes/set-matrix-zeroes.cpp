@@ -21,7 +21,7 @@ public:
             if (matrix[i][j] != 0) {
                 // check for col & row:
                 if (matrix[i][0] == 0 || matrix[0][j] == 0) {
-                    matrix[i][j] = 0;
+                    if(matrix[i][j] != 0) matrix[i][j] = 0;
                 }
             }
         }
