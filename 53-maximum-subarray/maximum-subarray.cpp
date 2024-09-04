@@ -39,26 +39,17 @@ public:
         prev[0] = -1e8;
 
         for(int ind=1;ind<=n;ind++){
-            for(int flag=0;flag<2;flag++){
-                if(flag == 0){
-                    int pick = nums[ind-1] + prev[flag+1];
+                    int pick = nums[ind-1] + prev[0+1];
 
-                    int notPick = prev[flag];
+                    int notPick = prev[0];
 
-                    curr[flag] = max(pick, notPick);
-                }
+                    curr[0] = max(pick, notPick);
 
-                if(flag == 1){
-                    int pick = nums[ind-1] + prev[flag];
+                    pick = nums[ind-1] + prev[1];
 
-                    curr[flag] = max(pick, 0);
-                }
-            }
+                    curr[1] = max(pick, 0);
             prev = curr;
         }
-
-
-
         return prev[0];
     }
 };
