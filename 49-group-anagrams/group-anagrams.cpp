@@ -1,32 +1,29 @@
 class Solution {
 public:
-    // vector<int> key(string s){
-    //     vector<int> count(26, 0);
-
-    //     for(char i : s){
-    //         count[i - 'a']++;
-    //     }
-
-    //     return count;
-    // }
-
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        map<vector<int>, vector<string>> mp;
-        for(auto it : strs){
-            vector<int> count(26, 0);
-            for(char c : it){
-                count[c - 'a']++;
-            }
-            mp[count].push_back(it);
+        unordered_map<string, vector<string>> m;
+        for (int i = 0; i < strs.size(); i++) {
+            string key = getKey(strs[i]);
+            m[key].push_back(strs[i]);
         }
-
-        vector<vector<string>> ans;
-
-        for(auto i : mp){
-            ans.push_back(i.second);
+        
+        vector<vector<string>> result;
+        for (auto it = m.begin(); it != m.end(); it++) {
+            result.push_back(it->second);
         }
-
-        return ans;
-
+        return result;
+    }
+private:
+    string getKey(string str) {
+        vector<int> count(26);
+        for (int j = 0; j < str.size(); j++) {
+            count[str[j] - 'a']++;
+        }
+        
+        string key = "";
+        for (int i = 0; i < count.size(); i++) {
+            key.append(to_string(count[i]) + '#');
+        }
+        return key;
     }
 };
