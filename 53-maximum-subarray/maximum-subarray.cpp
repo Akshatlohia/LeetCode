@@ -1,9 +1,9 @@
 class Solution {
 public:
     int f(int ind, int flag, vector<int>& nums, vector<vector<int>>& dp){
-        if(flag == 2){
-            return 0;
-        }
+        // if(flag == 2){
+        //     return 0;
+        // }
 
         if(ind<0){
             if(flag == 0){
@@ -37,7 +37,7 @@ public:
 
     int maxSubArray(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>> dp(n, vector<int>(2, -1));
+        vector<vector<int>> dp(n, vector<int>(3, -1));
 
         return f(n-1, 0, nums, dp);
     }
