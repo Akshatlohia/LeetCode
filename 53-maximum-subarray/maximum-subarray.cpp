@@ -1,11 +1,7 @@
 class Solution {
 public:
     int f(int ind, int flag, vector<int>& nums, vector<vector<int>>& dp){
-        // if(flag == 2){
-        //     return 0;
-        // }
-
-        if(ind<0){
+        if(ind == 0){
             if(flag == 0){
                 return -1e8;
             }
@@ -16,7 +12,7 @@ public:
         if(dp[ind][flag] != -1) return dp[ind][flag];
 
         if(flag == 0){
-            int pick = nums[ind] + f(ind-1, flag+1, nums, dp);
+            int pick = nums[ind-1] + f(ind-1, flag+1, nums, dp);
 
             int notPick = f(ind-1, flag, nums, dp);
 
@@ -24,11 +20,9 @@ public:
         }
 
         if(flag == 1){
-            int pick = nums[ind] + f(ind-1, flag, nums, dp);
+            int pick = nums[ind-1] + f(ind-1, flag, nums, dp);
 
-            int notPick = f(ind-1, flag+1, nums, dp);
-
-            return dp[ind][flag] = max(pick, notPick);
+            return dp[ind][flag] = max(pick, 0);
         }
 
         return 0;
@@ -37,8 +31,30 @@ public:
 
     int maxSubArray(vector<int>& nums) {
         int n = nums.size();
-        vector<vector<int>> dp(n, vector<int>(3, -1));
+        vector<vector<int>> dp(n+1, vector<int>(2, 0));
 
-        return f(n-1, 0, nums, dp);
+        dp[0][0] = -1e8;
+
+        for(int ind=1;ind<=n;ind++){
+            for(int flag=0;flag<2;flag++){
+                if(flag == 0){
+                    int pick = nums[ind-1] + dp[ind-1][flag+1];
+
+                    int notPick = dp[ind-1][flag];
+
+                    dp[ind][flag] = max(pick, notPick);
+                }
+
+                if(flag == 1){
+                    int pick = nums[ind-1] + dp[ind-1][flag];
+
+                    dp[ind][flag] = max(pick, 0);
+                }
+            }
+        }
+
+
+
+        return dp[n][0];
     }
 };
