@@ -13,17 +13,17 @@ public:
                 res = max(res , area);
                 l++;
             }
-            else if(h[r]<h[l]){
+            else{
                 int area = (r-l)*h[r];
                 res = max(res , area);
                 r--;
             }
-            else{
-                int area = (r-l)*h[l];
-                res = max(res , area);
-                l++;
-                r--;
-            }
+            // else{
+            //     int area = (r-l)*h[l];
+            //     res = max(res , area);
+            //     l++;
+            //     r--;
+            // }
         }
         return res;
     }
