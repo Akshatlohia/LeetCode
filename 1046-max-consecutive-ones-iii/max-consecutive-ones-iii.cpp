@@ -1,28 +1,31 @@
 class Solution {
 public:
     int longestOnes(vector<int>& nums, int k) {
-        queue < int > q;
-
         int left = 0, right = 0;
-        int n = nums.size();
-        int len = 0;
-        while (right < n) {
-            if(nums[right]==0){
-                if(k==0){
-                    left = right+1;
-                }
-                else if(q.size()>=k){
-                    left = q.front()+1;
-                    q.pop();
-                    q.push(right);
-                }
-                else{
-                    q.push(right);
-                }
+        int zeroCount = 0;
+        int maxLen = 0;
+        
+        while (right < nums.size()) {
+            // If the current element is 0, increment the zero count
+            if (nums[right] == 0) {
+                zeroCount++;
             }
-            len = max(len, right - left + 1);
+            
+            // If the number of zeros exceeds k, shrink the window from the left
+            while (zeroCount > k) {
+                if (nums[left] == 0) {
+                    zeroCount--;
+                }
+                left++; // Move the left pointer to shrink the window
+            }
+            
+            // Update the maximum window length
+            maxLen = max(maxLen, right - left + 1);
+            
+            // Expand the window by moving the right pointer
             right++;
         }
-        return len;
+        
+        return maxLen;
     }
 };
