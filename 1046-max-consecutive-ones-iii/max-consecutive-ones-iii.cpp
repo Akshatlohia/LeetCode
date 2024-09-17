@@ -12,7 +12,7 @@ public:
             }
             
             // If the number of zeros exceeds k, shrink the window from the left
-            while (zeroCount > k) {
+            if (zeroCount > k) {
                 if (nums[left] == 0) {
                     zeroCount--;
                 }
