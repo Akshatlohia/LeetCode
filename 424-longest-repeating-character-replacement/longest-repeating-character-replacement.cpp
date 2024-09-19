@@ -5,9 +5,11 @@ public:
         int l=0;
         int r=0;
         int len = 0;
+        int maxf = 0;
         while(r < s.size()){
             arr[s[r]-'A']++;
-            if((r-l+1) - *max_element(arr, arr + 26) <= k){
+            maxf = max(maxf, arr[s[r]-'A']);
+            if((r-l+1) - maxf <= k){
                 len = max(len, r-l+1);
             }
             else{
