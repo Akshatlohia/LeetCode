@@ -21,9 +21,9 @@ public:
             mpp[s[r]]--;
 
             while(cnt == m){
-                int size = r-l+1;
-                if(size<mini){
-                    mini = size;
+                // int size = r-l+1;
+                if(r-l+1<mini){
+                    mini = r-l+1;
                     minii = l;
                 }
                 mpp[s[l]]++;
