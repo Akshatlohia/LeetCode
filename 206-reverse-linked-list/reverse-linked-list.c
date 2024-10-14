@@ -13,8 +13,8 @@ struct ListNode* f(struct ListNode* head){
     }
 
     struct ListNode *newHead = f(head->next);
-    struct ListNode *j = head->next;
-    j->next = head;
+    // struct ListNode *j = head->next;
+    head->next->next = head;
     head->next = NULL;
     return newHead;
 }
